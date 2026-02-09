@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The EU Is Borrowing €90 Billion Together — The Policy Signal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --surface: #141414;
+            --text: #E8E4DE;
+            --text-muted: #8A857D;
+            --accent: #C9553A;
+            --border: #2A2A2A;
+            --border-light: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .article-page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 8rem 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .article-meta {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .article-page h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text-muted);
+        }
+
+        .article-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 2.5rem 0;
+        }
+
+        .article-source {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-source a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .article-source a:hover { border-bottom-color: var(--accent); }
+
+        .summary-callout {
+            background: var(--surface);
+            border-left: 3px solid var(--accent);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .summary-callout .callout-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-callout p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .body-text {
+            font-size: 1.02rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .prediction-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .prediction-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .prediction-box .pred-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .prediction-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-link { animation: fadeUp 0.5s ease both; animation-delay: 0.05s; }
+        .article-meta { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+        .article-page h1 { animation: fadeUp 0.5s ease both; animation-delay: 0.15s; }
+        .article-subtitle { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+
+        @media (max-width: 768px) {
+            .article-page { padding: 7rem 1.25rem 4rem; }
+            .article-page h1 { font-size: 1.8rem; }
+            .nav-inner { padding: 1rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="logo">
+            <div class="logo-mark"></div>
+            <span class="logo-text">The Policy Signal</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index.html">Archive</a>
+            <a href="../about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article-page">
+
+    <a href="../index.html" class="back-link">← Back to archive</a>
+
+    <div class="article-meta">February 2025</div>
+    <h1>The EU Is Borrowing €90 Billion Together — and That Changes Everything</h1>
+    <p class="article-subtitle">How Brussels' financial gamble reshapes pooled sovereignty and interdependence in wartime Europe.</p>
+
+    <div class="article-tags">
+        <span class="tag">Liberalism</span>
+        <span class="tag">Pooled Sovereignty</span>
+        <span class="tag">Multilateralism</span>
+        <span class="tag">Interdependence</span>
+        <span class="tag">Global Governance</span>
+    </div>
+
+    <div class="article-divider"></div>
+
+    <p class="article-source">Source: <a href="#">Euronews</a></p>
+
+    <div class="summary-callout">
+        <div class="callout-label">In Brief</div>
+        <p>The European Union will jointly borrow €90 billion to support Ukraine's defense against Russia. Funds will be disbursed gradually with conditions. Hungary, Slovakia, and the Czech Republic have opted out.</p>
+    </div>
+
+    <p class="body-text">
+        Where the U.S. acts alone, the EU acts collectively — and this €90 billion joint debt package is a textbook demonstration of pooled sovereignty. Member states are voluntarily sharing financial risk to support an ally, a move that only makes sense through a liberalist lens where multilateral cooperation and institutional trust outweigh narrow self-interest.
+    </p>
+
+    <p class="body-text">
+        The deeper story is about complex interdependence. Ukraine's financial stability and sovereignty are now structurally tied to EU decision-making. This initiative shows how a state's economic power and structural financial power are shaped through global flows of aid and international institutions — not just military hardware. By stabilizing Ukraine's economy during wartime, the EU is reinforcing Ukraine's external sovereignty from the outside in.
+    </p>
+
+    <div class="prediction-box">
+        <div class="pred-label">What Happens Next</div>
+        <p>The opt-outs from Hungary, Slovakia, and the Czech Republic signal real internal friction. But the EU will likely push the package through — its liberalist architecture and commitment to regional unity have historically absorbed dissent. The bigger question is whether joint borrowing becomes a norm or stays an exception, because that answer reshapes European sovereignty permanently.</p>
+    </div>
+
+</article>
+
+</body>
+</html>
