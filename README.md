@@ -3,10 +3,11 @@
 ## File Structure
 ```
 site/
-├── index.html          ← Homepage with post archive
-├── about.html          ← About page
+├── index.html                  ← Homepage with post archive
+├── about.html                  ← About page
 └── posts/
-    └── week12.html     ← Your first post
+    ├── us-venezuela-tanker.html   ← Post 1
+    └── eu-joint-debt.html         ← Post 2
 ```
 
 ## How to Publish (Free, 2 minutes)
@@ -26,11 +27,11 @@ site/
 5. Your site will be at `yourusername.github.io/thepolicysignal`
 
 ## How to Add a New Post
-1. Copy `posts/week12.html`
-2. Rename it (e.g. `week13.html`)
-3. Change the title, subtitle, tags, and body text
+1. Copy any file in `posts/` (e.g. `us-venezuela-tanker.html`)
+2. Rename it with a slug (e.g. `china-south-china-sea.html`)
+3. Change the title, subtitle, tags, source, and body text
 4. Add a new card to `index.html` (there's a template comment in the code)
-5. Re-upload to Netlify (just drag and drop again)
+5. Push to GitHub — Netlify auto-deploys
 
 ## Custom Domain (Optional, Later)
 Buy a domain like `thepolicysignal.com` from Namecheap (~$10/year)
