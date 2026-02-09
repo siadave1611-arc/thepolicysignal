@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Policy Signal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --surface: #141414;
+            --card: #1A1A1A;
+            --card-hover: #202020;
+            --text: #E8E4DE;
+            --text-muted: #8A857D;
+            --accent: #C9553A;
+            --accent-glow: rgba(201, 85, 58, 0.15);
+            --border: #2A2A2A;
+            --border-light: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+            margin-top: 3rem;
+        }
+
+        /* Posts section */
+        .posts-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .post-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Post cards */
+        .posts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .post-card {
+            background: var(--surface);
+            padding: 2rem 2.5rem;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 2rem;
+            align-items: start;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            background: var(--card-hover);
+        }
+
+        .post-date {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            padding-top: 0.3rem;
+        }
+
+        .post-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            transition: color 0.3s;
+        }
+
+        .post-card:hover .post-content h3 {
+            color: var(--accent);
+        }
+
+        .post-excerpt {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text-muted);
+        }
+
+        .post-arrow {
+            font-size: 1.2rem;
+            color: var(--border-light);
+            padding-top: 0.3rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .post-card:hover .post-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* Featured post */
+        .featured-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .featured-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .featured-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .featured-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            max-width: 650px;
+        }
+
+        .featured-card:hover h2 {
+            color: var(--accent);
+        }
+
+        .featured-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .featured-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 2rem;
+        }
+
+        .footer-bio {
+            max-width: 450px;
+        }
+
+        .footer-bio h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bio p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-right a {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .footer-right a:hover {
+            color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+        .hero h1 { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+        .hero-desc { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+        .featured-card { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+        .posts-grid { animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+
+        @media (max-width: 768px) {
+            .nav-inner { padding: 1rem 1.25rem; }
+            .hero { padding: 7rem 1.25rem 3rem; }
+            .posts-section { padding: 2rem 1.25rem 4rem; }
+            .post-card {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.5rem;
+            }
+            .post-arrow { display: none; }
+            .featured-card { padding: 2rem 1.5rem; }
+            .featured-card h2 { font-size: 1.6rem; }
+            .footer-inner { flex-direction: column; }
+            .footer-right { text-align: left; }
+            .nav-links { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-mark"></div>
+            <span class="logo-text">The Policy Signal</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Archive</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-label">Global Politics Analysis</div>
+    <h1>Decoding power, sovereignty, and the <em>systems</em> that shape the world</h1>
+    <p class="hero-desc">Weekly analysis at the intersection of global politics and data. Breaking down what's happening, why it matters, and what comes next.</p>
+    <div class="hero-line"></div>
+</section>
+
+<section class="posts-section">
+
+    <!-- Featured / Latest Post -->
+    <a href="posts/week12.html" class="featured-card">
+        <div class="featured-label">Latest Post</div>
+        <h2>Oil Tankers and Joint Debt: Two Faces of Sovereignty</h2>
+        <p class="featured-subtitle">How Washington's maritime enforcement and Brussels' financial gamble both reshape what sovereignty means in 2025.</p>
+        <div class="featured-meta">
+            <span class="featured-date">Week 12 · Feb 2025</span>
+            <div class="post-tags">
+                <span class="post-tag">Sovereignty</span>
+                <span class="post-tag">Realism</span>
+                <span class="post-tag">Liberalism</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- Archive -->
+    <div class="section-header">
+        <span class="section-title">Archive</span>
+        <span class="post-count">1 post</span>
+    </div>
+
+    <div class="posts-grid">
+        <a href="posts/week12.html" class="post-card">
+            <div class="post-date">Feb 2025</div>
+            <div class="post-content">
+                <h3>Oil Tankers and Joint Debt: Two Faces of Sovereignty</h3>
+                <p class="post-excerpt">The U.S. boards a Venezuelan oil tanker while the EU pools €90 billion in joint debt for Ukraine. Two radically different approaches to the same question: who controls sovereignty?</p>
+                <div class="post-tags">
+                    <span class="post-tag">Sovereignty</span>
+                    <span class="post-tag">Hard Power</span>
+                    <span class="post-tag">Multilateralism</span>
+                </div>
+            </div>
+            <div class="post-arrow">→</div>
+        </a>
+
+        <!-- TEMPLATE: Copy this block for each new post
+        <a href="posts/weekXX.html" class="post-card">
+            <div class="post-date">Month Year</div>
+            <div class="post-content">
+                <h3>Your Title Here</h3>
+                <p class="post-excerpt">Your one-line summary here.</p>
+                <div class="post-tags">
+                    <span class="post-tag">Tag</span>
+                </div>
+            </div>
+            <div class="post-arrow">→</div>
+        </a>
+        -->
+    </div>
+
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-bio">
+            <h4>The Policy Signal</h4>
+            <p>Weekly analysis of global politics — power, sovereignty, and the systems that shape them. Written by an IB Global Politics student exploring how data and policy intersect.</p>
+        </div>
+        <div class="footer-right">
+            <a href="mailto:your@email.com">Contact</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
