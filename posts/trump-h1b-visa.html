@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump's $100K Visa Fee Knocks Down the Bridge Between India and the U.S. — The Policy Signal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --surface: #141414;
+            --text: #E8E4DE;
+            --text-muted: #8A857D;
+            --accent: #C9553A;
+            --border: #2A2A2A;
+            --border-light: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .article-page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 8rem 2rem 5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .article-meta {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .article-page h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text-muted);
+        }
+
+        .article-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 2.5rem 0;
+        }
+
+        .article-source {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-source a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .article-source a:hover { border-bottom-color: var(--accent); }
+
+        .summary-callout {
+            background: var(--surface);
+            border-left: 3px solid var(--accent);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .summary-callout .callout-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-callout p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .body-text {
+            font-size: 1.02rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .prediction-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .prediction-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .prediction-box .pred-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .prediction-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-link { animation: fadeUp 0.5s ease both; animation-delay: 0.05s; }
+        .article-meta { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+        .article-page h1 { animation: fadeUp 0.5s ease both; animation-delay: 0.15s; }
+        .article-subtitle { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+
+        @media (max-width: 768px) {
+            .article-page { padding: 7rem 1.25rem 4rem; }
+            .article-page h1 { font-size: 1.8rem; }
+            .nav-inner { padding: 1rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../index.html" class="logo">
+            <div class="logo-mark"></div>
+            <span class="logo-text">The Policy Signal</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index.html">Archive</a>
+            <a href="../about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article-page">
+
+    <a href="../index.html" class="back-link">← Back to archive</a>
+
+    <div class="article-meta">February 2025</div>
+    <h1>Trump's $100K Visa Fee Is Severing the U.S.–India Tech Pipeline</h1>
+    <p class="article-subtitle">A single policy decision reveals how state actors can reshape globalization, disrupt MNCs, and upend the lives of millions of stakeholders overnight.</p>
+
+    <div class="article-tags">
+        <span class="tag">Globalization</span>
+        <span class="tag">State Actors</span>
+        <span class="tag">MNCs</span>
+        <span class="tag">Stakeholders</span>
+        <span class="tag">Immigration</span>
+        <span class="tag">Interdependence</span>
+    </div>
+
+    <div class="article-divider"></div>
+
+    <p class="article-source">Source: <a href="#">The New York Times</a></p>
+
+    <div class="summary-callout">
+        <div class="callout-label">In Brief</div>
+        <p>The Trump administration announced a massive increase in H-1B visa fees — up to $100,000 — directly targeting the pipeline of Indian tech workers that powers Silicon Valley. The decision has ignited tensions between the U.S. and India, with consequences rippling through governments, corporations, and families.</p>
+    </div>
+
+    <p class="body-text">
+        This story is a case study in how state actors wield power over globalized labor markets. The U.S. and Indian governments sit at the center as the primary state actors, each holding significant leverage over the outcome. But the impact radiates outward — multinational corporations like Amazon, Microsoft, Google, and Meta depend heavily on Indian talent to fill specialized engineering and tech roles, making them key MNCs caught in the crossfire. The real stakeholders, though, are the immigrant workers and their families whose careers, livelihoods, and futures are being repriced by a single policy change.
+    </p>
+
+    <p class="body-text">
+        What makes this significant is that it exposes a truth often overlooked: immigration policy is never purely domestic. It is deeply embedded in international relations and economic interdependence. More than half of all H-1B visas go to Indian nationals, meaning this fee hike doesn't just affect individual applicants — it threatens to drain India's most skilled workforce pipeline to the world's largest economy. This is a stark reminder of how much structural power state actors hold in creating — or destroying — opportunities for both stakeholders and MNCs, and how quickly that power can be exercised.
+    </p>
+
+    <div class="prediction-box">
+        <div class="pred-label">What Happens Next</div>
+        <p>Expect significant congressional pushback and legal challenges — a fee increase of this magnitude will provoke lawsuits and intense lobbying from the tech sector. H-1B-dependent companies like Amazon, Apple, Google, and Meta will look for loopholes: offshore hiring, remote work arrangements, or shifting operations to countries with friendlier immigration regimes. The broader economic impact could be serious — a sudden contraction in skilled Indian immigration will create talent gaps across the U.S. tech industry that won't be easy to fill.</p>
+    </div>
+
+</article>
+
+</body>
+</html>
